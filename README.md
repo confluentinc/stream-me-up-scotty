@@ -8,4 +8,4 @@ This repository contains workshops and workshop series created and presented by 
 
 ## Series
 
-* [Build Event-Driven Microservices with Confluent Cloud & Apache Kafka](https://github.com/confluentinc/commercial-workshops/tree/master/series-microservices)
+* [Build Event-Driven Microservices with Confluent Cloud & Apache Kafka](https://github.com/confluentinc/stream-me-up-scotty/tree/master/series-microservices)

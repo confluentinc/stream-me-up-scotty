@@ -63,7 +63,7 @@ These prerequisites outline what is necessary to have in order to be successful 
     > **Note:** This repository contains **all** of the workshops and workshop series Confluent's Commercial SE team has created. Be sure to navigate to the correct sub-folder to use the right content.
     ```bash
     # Clone the Commercial SE workshop repository
-    git clone https://github.com/confluentinc/commercial-workshops.git
+    git clone https://github.com/confluentinc/stream-me-up-scotty.git
     ```
     Navigate to the correct sub-folder to access this labs content. This should act as your working directory for the remainder of the lab. 
     ```bash 

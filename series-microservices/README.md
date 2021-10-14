@@ -10,8 +10,8 @@ Microservices, events, and containers are dominating today as businesses are rel
 
 This three part series will walk through examples of using your microservice architecture with Confluent Cloud & Apache Kafka. The three parts are as follows: 
 
-* [Getting Started with Confluent Cloud](https://github.com/confluentinc/commercial-workshops/tree/master/series-microservices/workshop-getting-started).
+* [Getting Started with Confluent Cloud](https://github.com/confluentinc/stream-me-up-scotty/tree/master/series-microservices/workshop-getting-started).
 * Seamlessly Connect Sources and Sinks to Confluent Cloud with Kafka Connect.
-* [Enable Real-time Data Transformations and Stream Processing with ksqlDB](https://github.com/confluentinc/commercial-workshops/tree/master/series-microservices/workshop-ksql).
+* [Enable Real-time Data Transformations and Stream Processing with ksqlDB](https://github.com/confluentinc/stream-me-up-scotty/tree/master/series-microservices/workshop-ksql).
 
 For more information about the series and details to register, navigate [here](https://events.confluent.io/workshopmicroservices).

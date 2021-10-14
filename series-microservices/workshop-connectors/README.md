@@ -81,7 +81,7 @@
     > **Note:** This repository contains **all** of the workshops and workshop series Confluent's Commercial SE team has created. Be sure to navigate to the correct sub-folder to use the right content.
     ```bash
     # clone the Commercial SE workshop repository
-    git clone https://github.com/confluentinc/commercial-workshops.git
+    git clone https://github.com/confluentinc/stream-me-up-scotty.git
     ```
     Navigate to the correct sub-folder to access this labs content. This should act as your working directory for the remainder of the lab. 
     ```bash 
@@ -253,7 +253,7 @@ Now that you have completed setting up your Confluent Cloud account, cluster, to
     > **Note:** This repository contains **all** of the workshops and workshop series led by Confluent's Commercial SE team. Be sure to navigate to the correct sub-directory to access the right content. 
     ```bash
     # Clone Confluent's Commercial SE Workshop repo
-    git clone https://github.com/confluentinc/commercial-workshops
+    git clone https://github.com/confluentinc/stream-me-up-scotty.git
     ```
     Then, navigate to the sub-directory for this lab.
     ```bash
