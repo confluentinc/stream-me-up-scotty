@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="images/confluent.png" width=50% height=50%>
+    <img src="images/stream-me-up-scotty.gif" width=50% height=50%>
 </div>
 
 # <div align="center">Confluent's Solution Engineering Digial Asset Repository</div>
