@@ -1,0 +1,24 @@
+-- In case you have not created a generic transactions stream, use this one
+-- from the activeconnector or a connector of your choice. 
+
+create stream transactions as select * from activetransactions emit changes;
+
+-- If you have not created a generic users stream, use this one from the
+-- tibco connector or a connector of your choice.
+
+create stream users as select * from tibcousers emit changes;
+
+-- Join transactions and users
+
+select 
+ users.first,
+ users.last,
+ users.country,
+ tx_type,
+ tx_amount,
+ tx_timestamp
+from users
+join transactions 
+within 1 hours 
+on users.userid = transactions.userid 
+emit changes; 

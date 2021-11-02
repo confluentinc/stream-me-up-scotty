@@ -1,0 +1,19 @@
+-- Example of creating a stream of user data from the tibco connector providing
+-- user data. Inferring the schema from the schema registry since we're using
+-- Avro.
+
+create stream tibco with (KAFKA_TOPIC='from-tibco', VALUE_FORMAT='AVRO');
+
+-- Pull the user data out of the text subfield
+
+create stream tibcotext as 
+select EXTRACTJSONFIELD(tibco.text, '$.user') as user,
+       EXTRACTJSONFIELD(tibco.text, '$.first') as first,
+       EXTRACTJSONFIELD(tibco.text, '$.last') as last,
+       EXTRACTJSONFIELD(tibco.text, '$.country') as country
+from tibco emit changes;
+
+-- Creating a typed users stream from the text fields
+
+CREATE STREAM TIBCOUSERS AS 
+  SELECT CAST(USER AS INT) USERID, FIRST, LAST, COUNTRY FROM TIBCOTEXT;

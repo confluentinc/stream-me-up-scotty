@@ -1,0 +1,3 @@
+The build-tibco.sh script will create the tibco docker container that is
+used in this demo and may need to be run before running docker-compose up
+referring to the tibco container.

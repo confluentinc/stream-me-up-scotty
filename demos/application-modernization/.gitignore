@@ -1,0 +1,18 @@
+# general
+clipboard.file
+notes
+.config
+.secrets
+
+# 'webapp'
+webapp-mf1/node_modules/
+webapp-mf2/node_modules/
+webapp-mf3/node_modules/
+
+# 'monolith'
+monolith/.env
+monolith/node_modules/
+
+# 'microservice'
+microservice/.env
+microservice/node_modules/

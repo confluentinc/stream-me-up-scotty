@@ -1,0 +1,4 @@
+# ignore tibco community edition zip
+*.zip
+# ignore all jars
+*.jars

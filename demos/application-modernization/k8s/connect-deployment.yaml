@@ -1,0 +1,131 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: connect-deployment
+    labels:
+        app: connect
+spec:
+    replicas: 1
+    strategy:
+        rollingUpdate:
+            maxSurge: 1
+            maxUnavailable: 1
+        type: RollingUpdate
+    selector:
+        matchLabels:
+            app: connect
+    template:
+        metadata:
+            labels:
+                app: connect
+        spec:
+            containers:
+                - name: connect
+                  image: zachhamilton/appmod-connect
+                  ports:
+                      - containerPort: 8083
+                        protocol: TCP
+                  env:
+                      - name: CONNECT_BOOTSTRAP_SERVERS
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: BOOTSTRAP_SERVERS
+                      - name: CONNECT_REST_PORT
+                        value: "8083"
+                      - name: CONNECT_GROUP_ID
+                        value: "connect"
+                      - name: CONNECT_CONFIG_STORAGE_TOPIC
+                        value: "connect-configs"
+                      - name: CONNECT_OFFSET_STORAGE_TOPIC
+                        value: "connect-offsets"
+                      - name: CONNECT_STATUS_STORAGE_TOPIC
+                        value: "connect-status"
+                      - name: CONNECT_REPLICATION_FACTOR
+                        value: "3"
+                      - name: CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR
+                        value: "3"
+                      - name: CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR
+                        value: "3"
+                      - name: CONNECT_STATUS_STORAGE_REPLICATION_FACTOR
+                        value: "3"
+                      - name: CONNECT_KEY_CONVERTER
+                        value: "org.apache.kafka.connect.storage.StringConverter"
+                      - name: CONNECT_VALUE_CONVERTER
+                        value: "io.confluent.connect.json.JsonSchemaConverter"
+                      - name: CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE
+                        value: "true"
+                      - name: SCHEMA_REGISTRY_KEY
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: SCHEMA_REGISTRY_KEY
+                      - name: SCHEMA_REGISTRY_SECRET
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: SCHEMA_REGISTRY_SECRET
+                      - name: CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: SCHEMA_REGISTRY_URL
+                      - name: CONNECT_VALUE_CONVERTER_BASIC_AUTH_CREDENTIALS_SOURCE
+                        value: "USER_INFO"
+                      - name: CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO
+                      - name: CONNECT_REST_ADVERTISED_HOST_NAME
+                        value: "connect"
+                      - name: CONNECT_PLUGIN_PATH
+                        value: "/usr/share/java,/usr/share/confluent-hub-components"
+                      - name: CONNECT_LOG4J_ROOT_LOGLEVEL
+                        value: "INFO"
+                      - name: CONNECT_LOG4J_LOGGERS
+                        value: "org.reflections=ERROR"
+                      - name: CLASSPATH
+                        value: "/usr/share/java/monitoring-interceptors/monitoring-interceptors-6.0.1.jar"
+                      - name: CLOUD_KEY
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: CLOUD_KEY
+                      - name: CLOUD_SECRET
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: CLOUD_KEY
+                        ## Worker
+                      - name: CONNECT_SECURITY_PROTOCOL
+                        value: "SASL_SSL"
+                      - name: CONNECT_SASL_JAAS_CONFIG
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: SASL_JAAS_CONFIG
+                      - name: CONNECT_SASL_MECHANISM
+                        value: "PLAIN"
+                      ## Producer
+                      - name: CONNECT_PRODUCER_SECURITY_PROTOCOL
+                        value: "SASL_SSL"
+                      - name: CONNECT_PRODUCER_SASL_JAAS_CONFIG
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: SASL_JAAS_CONFIG
+                      - name: CONNECT_PRODUCER_SASL_MECHANISM
+                        value: "PLAIN"
+                      ## Consumer
+                      - name: CONNECT_CONSUMER_SECURITY_PROTOCOL
+                        value: "SASL_SSL"
+                      - name: CONNECT_CONSUMER_SASL_JAAS_CONFIG
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: SASL_JAAS_CONFIG
+                      - name: CONNECT_CONSUMER_SASL_MECHANISM
+                        value: "PLAIN"
+                  

@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: microservice-deployment
+    labels:
+        app: microservice
+spec:
+    replicas: 1
+    strategy:
+        rollingUpdate:
+            maxSurge: 1
+            maxUnavailable: 1
+        type: RollingUpdate
+    selector:
+        matchLabels:
+            app: microservice
+    template:
+        metadata:
+            labels:
+                app: microservice
+        spec:
+            containers:
+                - name: monolith
+                  image: zachhamilton/appmod-microservice
+                  env:
+                      - name: BOOTSTRAP_SERVERS
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: BOOTSTRAP_SERVERS
+                      - name: SASL_USERNAME
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: CLOUD_KEY
+                      - name: SASL_PASSWORD
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: CLOUD_SECRET
+                      - name: SASL_MECHANISM
+                        value: "PLAIN"
+                      - name: SECURITY_PROTOCOL
+                        value: "SASL_SSL"
+                      - name: KSQLDB_API_KEY
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: KSQLDB_API_KEY
+                      - name: KSQLDB_API_SECRET
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: KSQLDB_API_SECRET
+                      - name: KSQLDB_API_ENDPOINT
+                        valueFrom:
+                            secretKeyRef:
+                                name: kafka-secrets
+                                key: KSQLDB_API_ENDPOINT
+                  ports:
+                      - containerPort: 8001
+                        protocol: TCP
+---

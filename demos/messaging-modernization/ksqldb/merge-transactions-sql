@@ -1,0 +1,13 @@
+-- Create a generic transactions stream from a specific transactions stream, for
+-- example tibco
+
+create stream transactions with (kafka_topic='transactions') as select * from tibcotransactions;
+
+-- Merge data from another transactions stream into the generic transaction
+-- stream. Repeat for each transactions data source to create a single
+-- transactions topic.
+
+insert into transactions select * from rabbittransactions;
+
+-- View the transactions data regardless of source
+select * from transactions emit changes;

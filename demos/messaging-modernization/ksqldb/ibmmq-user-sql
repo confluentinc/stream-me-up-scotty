@@ -1,0 +1,19 @@
+-- Example of creating a stream of user data from the ibmmq connector providing
+-- user data. Inferring the schema from the schema registry since we're using
+-- Avro.
+
+create stream ibmmq with (KAFKA_TOPIC='from-ibmmq', VALUE_FORMAT='AVRO');
+
+-- Pull the user data out of the text subfield
+
+create stream ibmmqtext as 
+select EXTRACTJSONFIELD(ibmmq.text, '$.user') as user,
+       EXTRACTJSONFIELD(ibmmq.text, '$.first') as first,
+       EXTRACTJSONFIELD(ibmmq.text, '$.last') as last,
+       EXTRACTJSONFIELD(ibmmq.text, '$.country') as country
+from ibmmq emit changes;
+
+-- Creating a typed users stream from the text fields
+
+CREATE STREAM IBMMQUSERS AS 
+  SELECT (CAST(USER AS INT)) USERID, FIRST, LAST, COUNTRY FROM IBMMQTEXT;
