@@ -1,0 +1,25 @@
+-- Create a stream from the transactions topic from the Tibco connector
+-- for transactions data. Since we're using Avro we can infer the schema
+-- from the schema registry.
+
+create stream tibco with (KAFKA_TOPIC='from-tibco', VALUE_FORMAT='AVRO');
+
+-- Extract transaction subfields from the text field
+
+create stream tibcotext as 
+ select EXTRACTJSONFIELD(tibco.text, '$.transaction') as TRANSACTION,
+        EXTRACTJSONFIELD(tibco.text, '$.amount') as AMOUNT,
+        EXTRACTJSONFIELD(tibco.text, '$.timestamp') as TIMESTAMP,
+        EXTRACTJSONFIELD(tibco.text, '$.user') as USERID
+ from tibco emit changes;
+
+-- Extract typed transaction fields from the text stream
+
+create stream tibcotransactions with (VALUE_FORMAT='AVRO') AS
+ SELECT TRANSACTION as tx_type,
+        SUBSTRING(amount,1,1) AS CURRENCY,
+        CAST(SUBSTRING(AMOUNT,2,LEN(AMOUNT)-1) AS DECIMAL(9,2)) AS TX_AMOUNT,
+	TIMESTAMP AS TX_TIMESTAMP,
+        CAST(USERID AS INT) AS USERID
+ FROM tibcotext where TIMESTAMP IS NOT NULL
+ EMIT CHANGES; 

@@ -1,0 +1,14 @@
+{
+  "name": "postgres-cdc-source",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+    "database.server.name": "postgres",
+    "database.hostname": "postgres-service.default.svc",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "postgres",
+    "table.include.list": "bank.customers, bank.accounts, bank.transactions"
+  }
+}

@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: monolith-deployment
+    labels:
+        app: monolith
+spec:
+    replicas: 1
+    strategy:
+        rollingUpdate:
+            maxSurge: 1
+            maxUnavailable: 1
+        type: RollingUpdate
+    selector:
+        matchLabels:
+            app: monolith
+    template:
+        metadata:
+            labels:
+                app: monolith
+        spec: 
+            containers:
+                - name: monolith
+                  image: zachhamilton/appmod-monolith
+                  env: 
+                      - name: PGUSER
+                        value: "postgres"
+                      - name: PGHOST
+                        value: "postgres-service.default.svc"
+                      - name: PGPASSWORD
+                        value: "postgres"
+                      - name: PGDATABASE
+                        value: "postgres"
+                      - name: PGPORT
+                        value: "5432"
+                  ports: 
+                      - containerPort: 8000
+                        protocol: TCP
+---

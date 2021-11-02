@@ -1,0 +1,12 @@
+{
+    "name": "jdbc-sink",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "tasks.max": "1",
+        "topics": "jdbc.bank.transactions",
+        "table.name.format": "bank.transactions",
+        "connection.url": "jdbc:postgresql://postgres-service.default.svc:5432/postgres",
+        "connection.user": "postgres",
+        "connection.password": "postgres"
+    }
+}

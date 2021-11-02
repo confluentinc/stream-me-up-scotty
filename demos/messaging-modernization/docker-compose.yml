@@ -1,0 +1,194 @@
+---
+version: '3.1'
+
+services:
+
+  control-center:
+    image: confluentinc/cp-enterprise-control-center:6.0.1
+    hostname: control-center
+    container_name: control-center
+    depends_on:
+      - kafka-connect
+    ports:
+      - "9021:9021"
+    environment:
+      CONTROL_CENTER_BOOTSTRAP_SERVERS: $BOOTSTRAP_SERVERS
+      CONTROL_CENTER_CONNECT_CLUSTER: 'kafka-connect:8083'
+        #CONTROL_CENTER_KSQL_KSQLDB1_URL: "http://ksqldb-server:8088"
+        #CONTROL_CENTER_KSQL_KSQLDB1_ADVERTISED_URL: "http://localhost:8088"
+      CONTROL_CENTER_SCHEMA_REGISTRY_URL: $SCHEMA_REGISTRY_URL
+      CONTROL_CENTER_SCHEMA_REGISTRY_BASIC_AUTH_CREDENTIALS_SOURCE: $BASIC_AUTH_CREDENTIALS_SOURCE
+      CONTROL_CENTER_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: $SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO
+      CONTROL_CENTER_STREAMS_SECURITY_PROTOCOL: SASL_SSL
+      CONTROL_CENTER_STREAMS_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
+      CONTROL_CENTER_STREAMS_SASL_MECHANISM: PLAIN
+      CONTROL_CENTER_REPLICATION_FACTOR: 3
+      CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 1
+      CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
+      CONFLUENT_METRICS_TOPIC_REPLICATION: 3
+      CONTROL_CENTER_METRICS_TOPIC_MAX_MESSAGE_BYTES: 8388608
+      PORT: 9021
+  
+  kafka-connect:
+    image: confluentinc/cp-kafka-connect:6.0.1
+    container_name: kafka-connect
+    hostname: kafka-connect
+    ports:
+      - 8083:8083
+    environment:
+      CONNECT_LOG4J_APPENDER_STDOUT_LAYOUT_CONVERSIONPATTERN: "[%d] %p %X{connector.context}%m (%c:%L)%n"
+      CONNECT_CUB_KAFKA_TIMEOUT: 300
+      CONNECT_BOOTSTRAP_SERVERS: $BOOTSTRAP_SERVERS
+      CONNECT_REST_ADVERTISED_HOST_NAME: 'kafka-connect'
+      CONNECT_REST_PORT: 8083
+      CONNECT_GROUP_ID: kafka-connect-group-01
+      CONNECT_CONFIG_STORAGE_TOPIC: _kafka-connect-group-01-configs
+      CONNECT_OFFSET_STORAGE_TOPIC: _kafka-connect-group-01-offsets
+      CONNECT_STATUS_STORAGE_TOPIC: _kafka-connect-group-01-status
+      CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: $SCHEMA_REGISTRY_URL
+      CONNECT_KEY_CONVERTER_BASIC_AUTH_CREDENTIALS_SOURCE: $BASIC_AUTH_CREDENTIALS_SOURCE
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: $SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO
+      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: $SCHEMA_REGISTRY_URL
+      CONNECT_VALUE_CONVERTER_BASIC_AUTH_CREDENTIALS_SOURCE: $BASIC_AUTH_CREDENTIALS_SOURCE
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: $SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO
+      CONNECT_INTERNAL_KEY_CONVERTER: 'org.apache.kafka.connect.json.JsonConverter'
+      CONNECT_INTERNAL_VALUE_CONVERTER: 'org.apache.kafka.connect.json.JsonConverter'
+      CONNECT_LOG4J_ROOT_LOGLEVEL: 'INFO'
+      CONNECT_LOG4J_LOGGERS: 'org.apache.kafka.connect.runtime.rest=WARN,org.reflections=ERROR'
+#     CONNECT_LOG4J_LOGGERS: 'org.apache.kafka.connect.runtime.rest=WARN,org.reflections=ERROR,org.eclipse.jetty.server=DEBUG'
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: '3'
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: '3'
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: '3'
+      CONNECT_PLUGIN_PATH: '/usr/share/java,/usr/share/confluent-hub-components/,/data/connect-jars'
+      CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-6.0.1.jar
+      # Connect worker
+      CONNECT_SECURITY_PROTOCOL: SASL_SSL
+      CONNECT_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
+      CONNECT_SASL_MECHANISM: PLAIN
+      # Connect producer
+      CONNECT_PRODUCER_SECURITY_PROTOCOL: SASL_SSL
+      CONNECT_PRODUCER_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
+      CONNECT_PRODUCER_SASL_MECHANISM: PLAIN
+      CONNECT_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
+      CONNECT_PRODUCER_CONFLUENT_MONITORING_INTERCEPTOR_SECURITY_PROTOCOL: SASL_SSL
+      CONNECT_PRODUCER_CONFLUENT_MONITORING_INTERCEPTOR_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
+      CONNECT_PRODUCER_CONFLUENT_MONITORING_INTERCEPTOR_SASL_MECHANISM: PLAIN
+      # Connect consumer
+      CONNECT_CONSUMER_SECURITY_PROTOCOL: SASL_SSL
+      CONNECT_CONSUMER_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
+      CONNECT_CONSUMER_SASL_MECHANISM: PLAIN
+      CONNECT_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
+      CONNECT_CONSUMER_CONFLUENT_MONITORING_INTERCEPTOR_SECURITY_PROTOCOL: SASL_SSL
+      CONNECT_CONSUMER_CONFLUENT_MONITORING_INTERCEPTOR_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
+      CONNECT_CONSUMER_CONFLUENT_MONITORING_INTERCEPTOR_SASL_MECHANISM: PLAIN
+    volumes:
+        - $PWD/jars:/tmp/jars
+    command: 
+      # In the command section, $ are replaced with $$ to avoid the error 'Invalid interpolation format for "command" option'
+      - bash 
+      - -c 
+      - |
+        echo "Installing connector plugins"
+        confluent-hub install --no-prompt confluentinc/kafka-connect-activemq:10.0.0
+        confluent-hub install --no-prompt confluentinc/kafka-connect-rabbitmq:1.3.2
+        confluent-hub install --no-prompt confluentinc/kafka-connect-tibco-source:1.2.0
+        confluent-hub install --no-prompt confluentinc/kafka-connect-ibmmq:10.0.0
+        confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:10.0.2
+        cp -v /tmp/jars/tibjms.jar /usr/share/confluent-hub-components/confluentinc-kafka-connect-tibco-source/lib/
+        cp -v /tmp/jars/jms.jar /usr/share/confluent-hub-components/confluentinc-kafka-connect-ibmmq/lib/
+        cp -v /tmp/jars/com.ibm.mq.allclient.jar /usr/share/confluent-hub-components/confluentinc-kafka-connect-ibmmq/lib/
+        #
+        echo "Launching Kafka Connect worker"
+        /etc/confluent/docker/run & 
+        #
+        sleep infinity
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    volumes:
+      - "$PWD/scripts/rabbit/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf"
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+
+  tibco-ems:
+    image: tibems:latest
+    hostname: tibco-ems
+    container_name: tibco-ems
+    ports:
+      - '7222:7222'
+
+  activemq:
+    image: rmohr/activemq # https://hub.docker.com/r/rmohr/activemq/
+    hostname: activemq
+    container_name: activemq
+    ports:
+      - '61616:61616'
+      - '8161:8161'
+
+  ibmmq:
+    image: ibmcom/mq # https://hub.docker.com/r/ibmcom/mq/
+    hostname: ibmmq
+    container_name: ibmmq
+    environment:
+      LICENSE: accept
+      MQ_QMGR_NAME: QM1
+      MQ_ADMIN_PASSWORD: passw0rd
+      MQ_APP_PASSWORD: passw0rd
+    ports:
+      - '1414:1414'
+      - '9443:9443'
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.0
+    container_name: elasticsearch
+    #restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      xpack.security.enabled: 'false'
+      discovery.type: "single-node"
+      ES_JAVA_OPTS: "-Xms750m -Xmx750m"
+      cluster.name: "elasticsearch-cp-demo"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:5.5.2
+    container_name: kibana
+    restart: always
+    depends_on:
+      - elasticsearch
+    ports:
+      - 5601:5601
+    environment:
+      xpack.security.enabled: 'false'
+
+#  mysql:
+#    image: mysql:5.7
+#    restart: always
+#    environment:
+#      MYSQL_DATABASE: 'db'
+#      # So you don't have to use root, but you can if you like
+#      MYSQL_USER: 'user'
+#      # You can use whatever password you like
+#      MYSQL_PASSWORD: 'password'
+#      # Password for root access
+#      MYSQL_ROOT_PASSWORD: 'password'
+#    ports:
+#      # <Port exposed> : < MySQL Port running inside container>
+#      - '3306:3306'
+#
+#  mongodb:
+    # *-----------------------------*
+    # To connect to mongoDB
+    #   docker exec --interactive --tty syslog_mongodb mongo localhost:27017
+    # *-----------------------------*
+#    image: mongo:4.2.2
+#    container_name: syslog_mongodb
+#    hostname: mongodb
+#    ports: 
+#    - "27017:27017"
+

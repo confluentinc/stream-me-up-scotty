@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: postgres-service
+    labels:
+        db: postgres
+spec:
+    selector:
+        db: postgres
+    ports:
+        - name: pg-port
+          port: 5432
+          targetPort: 5432
+          protocol: TCP
+    type: LoadBalancer
+---  
