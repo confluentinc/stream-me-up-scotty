@@ -34,7 +34,7 @@ To demonstrate the streaming ETL pattern, we build the below demo. For the purpo
 ## **Pre-reqs**
 * `git`
 * `jq`
-* Docker
+* Docker with minimum 8GB memory (Docker settings -> Resources -> Memory)
 * Confluent Cloud Account
     * Sign-up for a Confluent Cloud account [here](https://www.confluent.io/confluent-cloud/tryfree/).
     * Once you have signed up and logged in, click on the menu icon at the upper right hand corner, click on “Billing & payment”, then enter payment details under “Payment details & contacts”.
@@ -131,7 +131,7 @@ Confluent Cloud Schema Registry is used to manage schemas and it defines a scope
 
 1. Select **Global Access** and then **Continue**.
 
-1. Name your ksqlDB application and set the streaming units to
+1. Name your ksqlDB application and set the streaming units to the default value (When developing this content the default value was "4")
 
 1. Click **Launch Application**!
 > **Note:** A streaming unit, also known as a Confluent Streaming Unit (CSU), is the unit of pricing for Confluent Cloud ksqlDB. A CSU is an abstract unit that represents the linearity of performance.
@@ -449,8 +449,13 @@ select product_code, count(*) from ENRICHED_ORDERS group by product_code emit ch
 Elasticsearch will automatically get the enriched orders data. To confirm the same, use the below command in your terminal:
 
 ```bash
-curl localhost:9200/pksqlc-09qrpenriched_orders/_search | jq
+curl localhost:9200/<enriched_orders>/_search | jq
 ```
+> **Note:**
+1. Replace the <enriched orders topic name> with the correct topic name as shown under Topics in your Confluent Cloud UI
+2. It starts with pksql....
+3. ksql changes the case of the topic to caps like "ENRICHED_ORDERS" but Elastic only understand lower case. So change the capital letters to small when issuing the above command.
+
 Now lets add two new orders to the orders table with order_id "52" and "53". 
 
 Use the below command to add two more orders to the orders table.

@@ -3,7 +3,7 @@ version: '2'
 services:
 
   control-center:
-    image: confluentinc/cp-enterprise-control-center:6.2.0
+    image: confluentinc/cp-enterprise-control-center:6.2.2
     hostname: control-center
     container_name: control-center
     ports:
