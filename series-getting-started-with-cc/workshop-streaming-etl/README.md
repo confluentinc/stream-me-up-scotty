@@ -2,7 +2,7 @@
     <img src="images/confluent.png" width=50% height=50%>
 </div>
 
-# <div align="center">Getting Started with Stream Processing</div>
+# <div align="center">Getting Started with Stream Processing / Build Streaming ETL Pipelines</div>
 ## <div align="center">Lab Guide</div>
 
 ## **Agenda**

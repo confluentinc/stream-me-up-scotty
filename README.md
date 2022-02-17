@@ -9,3 +9,7 @@ This repository contains digital assets created and prepared by Confluent's Solu
 ## Series
 
 * [Getting Started with Confluent: How You Can Set Your Data in Motion](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc)
+
+## Demos
+
+For a list of available demos, please click [here](https://github.com/confluentinc/stream-me-up-scotty/tree/main/demos). More information on each individual demo can be found on the landing page. 

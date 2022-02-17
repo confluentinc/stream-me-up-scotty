@@ -16,6 +16,6 @@ Attend all 3 sessions or attend 1 session - all of the sessions relate but are i
 
 ## Workshops:
 
-* [Getting Started with Stream Processing](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-streaming-etl).
+* [Getting Started with Stream Processing / Build Streaming ETL Pipelines](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-streaming-etl).
 * [Seamlessly Connect Sources and Sinks to Confluent Cloud](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-connectors).
-* [Enable Real-time Data Transformations and Stream Processing with ksqlDB](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-ksql).
+* [Stream Processing with ksqlDB](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-ksql).
