@@ -2,7 +2,7 @@
     <img src="images/confluent.png" width=50% height=50%>
 </div>
 
-# <div align="center">Getting Started with Confluent: How You Can Set Your Data in Motion</div>
+# <div align="center">Event-Driven Architecture Learning Series</div>
 
 ## Introduction
 
@@ -16,6 +16,6 @@ Attend all 3 sessions or attend 1 session - all of the sessions relate but are i
 
 ## Workshops:
 
-* [Getting Started with Stream Processing / Build Streaming ETL Pipelines](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-streaming-etl).
-* [Seamlessly Connect Sources and Sinks to Confluent Cloud](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-connectors).
-* [Stream Processing with ksqlDB](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-ksql).
+* [Build Streaming ETL Pipelines With Connectors, KsqlDB And Schema Registry](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-streaming-etl).
+* [Ready, Set, Connect! Seamlessly Connect Popular Sources And Sinks To Confluent](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-connectors).
+* [Monitor And Analyze Real-Time Data Faster With KsqlDB](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-ksql).
