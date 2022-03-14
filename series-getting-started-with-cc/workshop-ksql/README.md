@@ -2,7 +2,7 @@
     <img src="images/confluent.png" width=50% height=50%>
 </div>
 
-# <div align="center">Stream Processing with ksqlDB</div>
+# <div align="center">Monitor And Analyze Real-Time Data Faster With KsqlDB</div>
 ## <div align="center">Lab Guide</div>
 <br>
 
@@ -28,13 +28,8 @@
 
 1. Create a Confluent Cloud Account.
     - Sign up for a Confluent Cloud account [here](https://www.confluent.io/confluent-cloud/tryfree/).
-    - Once you have signed up and logged in, click on the menu icon at the upper right hand corner, click on “Billing & payment”, then enter payment details under “Payment details & contacts”. A screenshot of the billing UI is included below.
 
-> **Note:** You will create resources during this workshop that will incur costs. When you sign up for a Confluent Cloud account, you will get up to $200 per month deducted from your Confluent Cloud statement for the first three months. This will cover the cost of resources created during the workshop. 
-
-<div align="center" padding=25px>
-    <img src="images/billing.png" width=75% height=75%>
-</div>
+> **Note:** You will create resources during this workshop that will incur costs. New sign-ups receive $400 to spend within Confluent Cloud during their first 60 days. This will cover the cost of resources created during the workshop. 
 
 ***
 

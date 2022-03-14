@@ -2,7 +2,7 @@
     <img src="images/confluent.png" width=50% height=50%>
 </div>
 
-# <div align="center">Getting Started with Stream Processing / Build Streaming ETL Pipelines</div>
+# <div align="center">Build Streaming ETL Pipelines With Connectors, KsqlDB And Schema Registry</div>
 ## <div align="center">Lab Guide</div>
 
 ## **Agenda**
@@ -35,9 +35,8 @@ This workshop will be utilizing mongoDB Atlas, BigQuery, and Data Studio instanc
 
 1. Confluent Cloud Account
     * Sign-up for a Confluent Cloud account [here](https://www.confluent.io/confluent-cloud/tryfree/).
-    * Once you have signed up and logged in, click on the menu icon at the upper right hand corner, click on “Billing & payment”, then enter payment details under “Payment details & contacts”.
 
-    > **Note:** You will create resources during this workshop that will incur costs. When you sign up for a Confluent Cloud account, you will get up to $200 per month deducted from your Confluent Cloud statement for the first three months. This will cover the cost of resources created during the workshop.
+    > **Note:** You will create resources during this workshop that will incur costs. New sign-ups receive $400 to spend within Confluent Cloud during their first 60 days. This will cover the cost of resources created during the workshop.
 
 1. Ports `443` and `9092` need to be open to the public internet for outbound traffic. To check, try accessing the following from your web browser:
     * portquiz.net:443
