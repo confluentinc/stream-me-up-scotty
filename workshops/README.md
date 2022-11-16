@@ -14,7 +14,7 @@ See the following inventory of currently available Workshops.
 
 | Workshop | Description |
 |---|---|
-| [Application Modernization](https://github.com/confluentinc/stream-me-up-scotty/tree/main/workshops/application-modernization) | This workshop will provide a walkthrough experience of following the Strangler Fig pattern for migrating an application from a Monolithic Architecture to a Microservices one using Kafka and Confluent Cloud.  |
-| [Messaging Modernization](https://github.com/confluentinc/stream-me-up-scotty/tree/main/workshops/messaging-modernization) | This workshop will provide a walkthrough of modernizing an existing legacy messaging architecture to Kafka and Confluent Cloud.  |
-| [Streaming ETL](https://github.com/confluentinc/stream-me-up-scotty/tree/main/workshops/streaming-etl) | This workshop will provide a walkthrough of creating a Streaming ETL architecture to process and transform streams of data in real time using Kafka and Confluent Cloud.  |
-| [Microservices with C# and .NET](https://github.com/confluentinc/stream-me-up-scotty/tree/main/workshops/microservices-with-csharp-and-dotnet) | Create C# and .NET microservices that produce/consume messages using Confluent Cloud. 
+| [Application Modernization](application-modernization) | This workshop will provide a walkthrough experience of following the Strangler Fig pattern for migrating an application from a Monolithic Architecture to a Microservices one using Kafka and Confluent Cloud.  |
+| [Messaging Modernization](messaging-modernization) | This workshop will provide a walkthrough of modernizing an existing legacy messaging architecture to Kafka and Confluent Cloud.  |
+| [Streaming ETL](streaming-etl) | This workshop will provide a walkthrough of creating a Streaming ETL architecture to process and transform streams of data in real time using Kafka and Confluent Cloud.  |
+| [Microservices with C# and .NET](microservices-with-csharp-and-dotnet) | Create C# and .NET microservices that produce/consume messages using Confluent Cloud. |
