@@ -1,0 +1,7 @@
+.terraform/
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
+terraform.tfstate
+terraform.tfstate.backup
+env.sh
+client.properties
