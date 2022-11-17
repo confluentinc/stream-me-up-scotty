@@ -12,5 +12,5 @@ The following lists the current inventory of "templates" that you can follow.
 
 | Template | Description |
 | --- | --- |
-| [Custom Data with Postgres CDC](https://github.com/confluentinc/stream-me-up-scotty/tree/main/templates/custom-data-with-postgres-cdc) | Make your own instance of Postgres, with your own custom dataset. |
-| [Terraform: 'Default' Basic Cluster](https://github.com/confluentinc/stream-me-up-scotty/tree/main/templates/terraform-default-basic-cluster) | Create a "just the essentials" Confluent Cloud environment, cluster, etc. |
+| [Custom Data with Postgres CDC](custom-data-with-postgres-cdc) | Make your own instance of Postgres, with your own custom dataset. |
+| [Terraform: 'Default' Basic Cluster](terraform-default-basic-cluster) | Create a "just the essentials" Confluent Cloud environment, cluster, etc. |

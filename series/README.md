@@ -12,5 +12,5 @@ The following lists the current inventory of "series" that you can follow.
 
 | Series | Description |
 | --- | --- |
-| [Getting Started With Confluent Cloud](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series/getting-started-with-cc) | Learn about the core tenants of Confluent Cloud. From the basics, to connectors, all the way to Ksql. |
-| [Path to Production](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series/path-to-production) | Learn everything you need to know to make your path into production with Confluent Cloud. |
+| [Getting Started With Confluent Cloud](getting-started-with-cc) | Learn about the core tenants of Confluent Cloud. From the basics, to connectors, all the way to Ksql. |
+| [Path to Production](path-to-production) | Learn everything you need to know to make your path into production with Confluent Cloud. |

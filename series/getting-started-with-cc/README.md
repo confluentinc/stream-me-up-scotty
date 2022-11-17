@@ -16,6 +16,6 @@ Attend all 3 sessions or attend 1 session - all of the sessions relate but are i
 
 ## Workshops:
 
-* [Build Streaming ETL Pipelines With Connectors, KsqlDB And Schema Registry](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-streaming-etl).
-* [Ready, Set, Connect! Seamlessly Connect Popular Sources And Sinks To Confluent](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-connectors).
-* [Monitor And Analyze Real-Time Data Faster With KsqlDB](https://github.com/confluentinc/stream-me-up-scotty/tree/main/series-getting-started-with-cc/workshop-ksql).
+* [Build Streaming ETL Pipelines With Connectors, KsqlDB And Schema Registry](workshop-streaming-etl).
+* [Ready, Set, Connect! Seamlessly Connect Popular Sources And Sinks To Confluent](workshop-connectors).
+* [Monitor And Analyze Real-Time Data Faster With KsqlDB](workshop-ksql).
