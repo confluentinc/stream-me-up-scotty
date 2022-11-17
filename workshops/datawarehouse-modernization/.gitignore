@@ -1,0 +1,12 @@
+/terraform/aws/.terraform*
+/terraform/aws/terraform*
+
+/terraform/gcp/creds/*.*
+/terraform/gcp/.terraform*
+/terraform/gcp/terraform*
+
+/postgres/conf
+
+env.sh
+notes.file
+notes.sql
