@@ -56,10 +56,10 @@ Finally, in order to sink data to a data warehouse in real-time, you'll need one
 
 1. Clone and enter this repo.
     ```bash
-    git clone https://github.com/zacharydhamilton/realtime-datawarehousing
+    git clone https://github.com/confluentinc/stream-me-up-scotty.git
     ```
     ```bash
-    cd realtime-datawarehousing
+    cd workshops/datawarehouse-modernization
     ```
 1. Create a new "clipboard" file in the directory. Since a variety of credentials will be required, a place to keep track of them will be necessary. The following is the recommended approach. 
     ```bash 
