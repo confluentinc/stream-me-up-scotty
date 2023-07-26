@@ -1,9 +1,0 @@
-This directory should contain dependent jars for the tibco and ibm mq
- connectors.  They're copied into the kafka-connect container as specified in 
-docker-compose.yml on start.
-
-These jars can be freely obtained from IBM and Tibco.
-
-For IBM MQ, see the doc at: https://docs.confluent.io/kafka-connect-ibmmq-sink/current/#ibmmq-client-jar and place the allclient jar and the jms.jar file in this directory.
-
-For Tibco, obtain Tibco EMS from https://www.tibco.com/resources/product-download/tibco-enterprise-message-service-community-edition--free-download, extract the tibjms.jar and place it here. The build-tibco.sh script which builds the docker image should extract the jar as well. 
